@@ -1,0 +1,63 @@
+{
+  "author": "yofiyonadio",
+  "license": "ISC",
+  "name": "backlient",
+  "version": "1.0.0",
+  "description": "Yofi Technical Test",
+  "main": "index.js",
+  "files": [
+    "app/**/*",
+    "controllers/**/*",
+    "middlewares/**/*",
+    "utils/**/*"
+  ],
+  "scripts": {
+    "start:ts": "NODE_PATH=./src/ ts-node ./src/app/server/start.ts",
+    "migrate": "NODE_PATH=./src/ ts-node ./src/entities",
+    "build": "npx tsc-silent -p tsconfig.json --suppress",
+    "compile:production": "npm run tslint && npm run clear:build && npm run build && gulp production",
+    "compile:development": "npm run tslint && npm run clear:build && npm run build && gulp development",
+    "serve": "cd ./build/src && export NODE_PATH=./ && node app/server/start.js",
+    "server": "cd ./build/src && export NODE_PATH=./ && node app/server/start.js",
+    "kill": "lsof -t -i tcp:5500 | xargs kill",
+    "clean:mod": "rm -rf node_modules package-lock.json src/sub_modules",
+    "clear:build": "rm -rf ./build",
+    "tslint": "npx tslint -c tslint.json \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "cron": "^2.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.41",
+    "node-cron": "^3.0.2",
+    "npm-check-updates": "^16.7.10",
+    "pg": "8.9.0",
+    "typeorm": "^0.3.12",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/cron": "^2.0.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "4.17.17",
+    "@types/express-session": "^1.17.6",
+    "@types/glob": "^8.1.0",
+    "@types/node": "^18.14.5",
+    "@types/node-cron": "^3.0.7",
+    "@types/uuid": "^9.0.1",
+    "gulp": "^4.0.2",
+    "gulp-install": "^1.1.0",
+    "gulp-rename": "^2.0.0",
+    "merge-stream": "^2.0.0",
+    "ts-node": "^10.9.1",
+    "tsc-silent": "^1.2.2",
+    "tsconfig-paths": "^4.0.0",
+    "tslint": "^5.20.1",
+    "typescript": "^4.9.5"
+  }
+}
