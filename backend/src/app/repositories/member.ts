@@ -2,6 +2,7 @@ import RepositoryModel, { GETTER, OPTION, Returned, TypeFilter } from 'sub_modul
 import { EntityManager, SelectQueryBuilder } from 'typeorm'
 import { TypeInsert, TypeUpdate } from 'entities/types'
 import MemberRecord, { MemberInterface } from 'entities/records/member'
+import BorrowRecord, { BorrowInterface, BORROW_STATUS } from 'entities/records/borrow'
 
 
 class MemberRepository extends RepositoryModel {
@@ -22,16 +23,23 @@ class MemberRepository extends RepositoryModel {
 
 	// ============================= GETTER =============================
 
-	async getMember<T extends MemberInterface, GET extends GETTER>(
+	async getMember<T extends MemberInterface & {
+		borrows?: BorrowInterface[]
+	}, GET extends GETTER>(
 		{
 			filter,
 			option,
 		}: {
 			filter?: TypeFilter<Partial<MemberInterface>>,
-			option: OPTION<GET>
+			option: OPTION<GET> & {
+				with_active_borrow?: boolean
+			}
 		}, transaction: EntityManager
 	): Returned<T, GET> {
 		return await this.querySelectNew(MemberRecord, 'member', (Q: SelectQueryBuilder<T>) => {
+			if (option.with_active_borrow) {
+				Q.leftJoinAndMapMany('member.borrows', BorrowRecord, 'borrow', `borrow.member_id = member.id AND borrow.status = '${BORROW_STATUS.BORROWED}'`)
+			}
 			return Q
 		}, {
 			...option,

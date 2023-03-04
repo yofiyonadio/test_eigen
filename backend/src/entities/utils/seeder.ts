@@ -5,7 +5,7 @@ import { isObject } from '../../sub_modules/utils/helpers/object'
 
 const __Records = Object.values(_Records).map(record => {
     try {
-        const instanceRecord = record
+        const instanceRecord = new record()
         const schema = record['table']['schema']
         const table = record['table']['name']
         return {

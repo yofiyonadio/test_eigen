@@ -5,6 +5,7 @@ import { parseQuerys } from 'sub_modules/utils'
 import { Anyses } from 'sub_modules/apiface/_type'
 import { Apiface_V1_Members } from 'sub_modules/apiface'
 import { MemberRepository } from 'app/repositories'
+import { blackListKey } from 'sub_modules/utils/helpers/object'
 
 type Apiface = Apiface_V1_Members
 class MemberController extends ControllerModel {
@@ -12,13 +13,12 @@ class MemberController extends ControllerModel {
 	route(): Anyses<Apiface> {
 		return {
 			'/member': {
-				post: this.createMember,
-				get: this.getMember
+				get: this.getMembers
 			}
 		}
 	}
 
-	private getMember = async (req: Request, res: Response):
+	private getMembers = async (req: Request, res: Response):
 		Apiface['/member']['get']['response'] =>
 		this.transaction(req, res, async transaction => {
 
@@ -39,23 +39,17 @@ class MemberController extends ControllerModel {
 				filter: member,
 				option: {
 					get: 'MANY',
-					getAllWhenNoFilter: true
+					getAllWhenNoFilter: true,
+					with_active_borrow: true
 				}
-			}, transaction)
-		})
-
-
-	private createMember = async (req: Request, res: Response):
-		Apiface['/member']['post']['response'] =>
-		this.transaction(req, res, async transaction => {
-
-			const member: Apiface['/member']['post']['body'] =
-				req.body
-			Validator(member, {
-				code: 'string',
-				name: 'string'
+			}, transaction).then(members => {
+				return members.map(member => {
+					return {
+						...blackListKey(member, ['borrows']),
+						total_borrowed: member.borrows?.length ?? 0
+					}
+				})
 			})
-			return await MemberRepository.insert(member, transaction)
 		})
 
 }

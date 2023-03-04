@@ -3,7 +3,6 @@ import {
 } from 'typeorm'
 
 import { promiseReduce } from 'sub_modules/utils/helpers/object'
-import Scheduler from 'app/server/scheduler'
 
 export let Connections: DataSource[] = []
 
@@ -52,13 +51,9 @@ export async function trxRollback(qRs: (QueryRunner | EntityManager)[]) {
 export default {
     async init(config: TYPE_DB_CONFIG[]) {
         const conns = await promiseReduce(config, async c => await DBConnector(c))
-        if (CONFIG()?.CONFIG_SCHEDULER?.length) {
-            Scheduler.initialize(CONFIG().CONFIG_SCHEDULER as Required<TYPE_CONFIG>['CONFIG_SCHEDULER'])
-        }
         Logger('Database', 'Connection has been established successfully!', 'blue')
         return conns
     }
-
 }
 
 async function DBConnector({

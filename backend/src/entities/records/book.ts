@@ -6,32 +6,36 @@ import {
 import { InterfaceModel } from '../models'
 import BorrowRecord from './borrow'
 
-export interface MemberInterface extends InterfaceModel {
+export interface BookInterface extends InterfaceModel {
     code: string
-    name: string
+    title: string
+    author: string
+    stock: number
     deleted_at?: Date
 }
 
 
-export class MemberRecord extends RecordModel implements Required<MemberInterface> {
+export class BookRecord extends RecordModel implements Required<BookInterface> {
 
     public static table = {
         schema: 'app',
-        name: 'member',
+        name: 'book',
         comment: '@omit create,update,delete',
     }
 
-    public static columns: TypeColumns<MemberInterface> = {
+    public static columns: TypeColumns<BookInterface> = {
         ...RecordModel.base_columns(),
         code: true,
-        name: true,
-        deleted_at: true
+        title: true,
+        author: true,
+        stock: true,
+        deleted_at: true,
     }
 
     @Column({
         ...RecordModel.column_varchar({
             nullable: false,
-            length: 4 as any,
+            length: 6 as any,
             unique: true
         })
     })
@@ -43,7 +47,23 @@ export class MemberRecord extends RecordModel implements Required<MemberInterfac
             length: '255',
         })
     })
-    name: string
+    title: string
+
+
+    @Column({
+        ...RecordModel.column_varchar({
+            nullable: false,
+            length: '50',
+        })
+    })
+    author: string
+
+    @Column({
+        ...RecordModel.column_integer({
+            nullable: false,
+        })
+    })
+    stock: number
 
     @Column({
         ...RecordModel.column_timestampz({
@@ -55,17 +75,17 @@ export class MemberRecord extends RecordModel implements Required<MemberInterfac
 
     // ====================== TYPORM RELATION DEFINITION =======================
 
-    @OneToMany(() => BorrowRecord, borrow => borrow.member, {
+    @OneToMany(() => BorrowRecord, borrow => borrow.book, {
         nullable: true,
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT',
     })
     borrows?: BorrowRecord[]
 
-    public seeder(): MemberInterface[] {
-        return require('../../../data/member.json').map((member: MemberInterface, n: number) => {
+    public seeder(): BookInterface[] {
+        return require('../../../data/book.json').map((book: BookInterface, n: number) => {
             return {
-                ...member,
+                ...book,
                 id: n + 1
             }
         })
@@ -73,4 +93,4 @@ export class MemberRecord extends RecordModel implements Required<MemberInterfac
 
 }
 
-export default MemberRecord
+export default BookRecord
