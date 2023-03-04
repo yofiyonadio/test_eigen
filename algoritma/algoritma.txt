@@ -1,0 +1,52 @@
+1. Terdapat string "NEGIE1", silahkan reverse alphabet nya dengan angka tetap diakhir kata Hasil = "EIGEN1"
+
+Solution:
+
+function reverseAlphabet(str: string) {
+  return str.split('').reduce((init, s) => {
+    return /[0-9]+/g.test(s) ? init + s : s + init
+  }, '')
+}
+
+
+
+
+2. Diberikan contoh sebuah kalimat, silahkan cari kata terpanjang dari kalimat tersebut, jika ada kata dengan panjang yang sama silahkan ambil salah satu
+
+Solution:
+
+function longest(sentence: string) {
+    return sentence.split(' ').reduce((init, s) => {
+        return s.length > init.length ? s : init
+    }, '')
+}
+
+
+
+
+3. Terdapat dua buah array yaitu array INPUT dan array QUERY, silahkan tentukan berapa kali kata dalam QUERY terdapat pada array INPUT
+
+Solution:
+
+function countQUERY<T extends string[]>(QUERY: T, INPUT: T) {
+    return QUERY.reduce((init: number[], Q) => {
+        const count = INPUT.filter(I => I === Q).length
+        return [...init, count]
+    }, [])
+}
+
+
+
+
+4. Silahkan cari hasil dari pengurangan dari jumlah diagonal sebuah matrik NxN
+
+Solution:
+
+function countDiagonal(matrix: number[][]) {
+    return matrix.reduce((init, mtx, n) => {
+        const X = mtx[n]
+        const Y = mtx[(mtx.length - 1) - n]
+        return init + (X - Y)
+    }, 0)
+}
+
