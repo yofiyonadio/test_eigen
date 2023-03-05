@@ -6,7 +6,7 @@ export type CONFIG = TYPE_CONFIG
 
 export const CONFIG = {
     CONFIG_SERVER: {
-        APP_NAME: 'Backlient',
+        APP_NAME: 'Backlien',
         PORT: parseInt(process.env.PORT as any, 10),
         SECRET: '$2a$12$29e0S.0moK/ZXHhZz32ziOtwvvWIaWsP5gzFO/aq3U3gGbt6wXaCG',
         ENV: process.env.ENV
@@ -14,7 +14,7 @@ export const CONFIG = {
     CONFIG_DB: [
         {
             NAME: 'defaultConnection',
-            APPLICATION_NAME: 'Backlient',
+            APPLICATION_NAME: 'Backlien',
             DB_HOST: process.env.DB_HOST,
             DB_PORT: parseInt(process.env.DB_PORT as any, 10),
             DB_NAME: process.env.DB_NAME,

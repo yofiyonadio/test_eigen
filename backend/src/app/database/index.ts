@@ -71,7 +71,7 @@ async function DBConnector({
         name: NAME,
         applicationName: APPLICATION_NAME,
         type: 'postgres',
-        ssl: DB_HOST !== 'localhost' ? { rejectUnauthorized: false } : false,
+        ssl: DB_HOST !== 'localhost' && DB_HOST !== 'postgres_backlien' ? { rejectUnauthorized: false } : false,
         host: DB_HOST,
         port: parseInt(DB_PORT as any, 10),
         database: DB_NAME,

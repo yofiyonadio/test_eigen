@@ -69,7 +69,7 @@ export default {
 		Router.init(app)
 
 		app.listen(CONFIG().CONFIG_SERVER.PORT, () => {
-			_Logger('Server  ', CONFIG().CONFIG_SERVER.APP_NAME + ' is running on port ' + CONFIG().CONFIG_SERVER.PORT + '!', 'blue')
+			_Logger('Server  ', CONFIG().CONFIG_SERVER.APP_NAME + ' is running on http://localhost:' + CONFIG().CONFIG_SERVER.PORT + '!', 'blue')
 			_Logger('Server  ', '---------------------------------------------', 'green')
 		})
 	},

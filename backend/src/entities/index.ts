@@ -97,7 +97,7 @@ const Log = (...arg: Parameters<typeof _Log>) => _Log(...arg);
 
             await qR.commitTransaction()
             await qR.release()
-            Logger('DATABASE', 'Success serve on DB ' + process.env.DB_HOST + ' .......')
+            Logger('DATABASE', 'Success migrate on DB ' + process.env.DB_HOST + ' .......')
         } catch (e) {
             Log(e)
             await qR.rollbackTransaction()

@@ -18,6 +18,21 @@ gulp.task('production', function () {
     return merge(streams)
 })
 
+gulp.task('docker', function () {
+    const streams = []
+    streams.push(gulp.src(['./package.json'])
+        .pipe(gulp.dest(BUILD_DEST))
+        .pipe(install({
+            args: ['--only=prod']
+        })))
+    streams.push(gulp.src(['./env/docker.env'])
+        .pipe(rename('.env'))
+        .pipe(gulp.dest(BUILD_DEST + '/src')))
+    streams.push(gulp.src(['./data/book.json', './data/member.json'])
+        .pipe(gulp.dest('./build/data')))
+    return merge(streams)
+})
+
 gulp.task('development', function () {
     const streams = []
     streams.push(gulp.src(['./package.json'])
