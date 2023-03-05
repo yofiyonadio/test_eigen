@@ -1,5 +1,7 @@
 # Eigen Technical Test by Yofi
 
+disclaimer
+
 # To Run this Project
 
 # Run via Docker
@@ -8,7 +10,7 @@
 
 # Run via NPM
 - npm install
-- npm run server
+- npm run dev
 
 
 Server will run at http://localhost:5500
