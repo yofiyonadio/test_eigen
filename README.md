@@ -12,6 +12,7 @@ This project was built using Node version 18.7.0 and NPM version 9.6.0
 # Run via NPM
 You first need to configure the database settings in the .env file
 
+- cd backend/
 - npm install
 - npm run migrate
 - npm run dev
