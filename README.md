@@ -14,6 +14,8 @@ This project was built using Node version 18.7.0 and NPM version 9.6.0
 - npm run migrate
 - npm run dev
 
+You can configure the database settings in the .env file.
+
 
 Server will run at http://localhost:5500
 
