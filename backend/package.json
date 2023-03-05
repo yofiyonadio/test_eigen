@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "NODE_PATH=./src/ ts-node ./src/app/server/start.ts",
     "migrate": "NODE_PATH=./src/ ts-node ./src/entities",
-    "migrates": "NODE_PATH=./build/src/ ts-node ./build/src/entities/index.js",
+    "migrates": "cd ./build/src && export NODE_PATH=./ && node entities/index.js",
     "build": "npx tsc-silent -p tsconfig.json --suppress",
     "build:docker": "tsc --build --clean && tsc --project ./ && gulp docker",
     "compile:production": "npm run tslint && npm run clear:build && npm run build && gulp production",
