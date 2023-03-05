@@ -11,6 +11,7 @@ This project was built using Node version 18.7.0 and NPM version 9.6.0
 
 # Run via NPM
 - npm install
+- npm run migrate
 - npm run dev
 
 
