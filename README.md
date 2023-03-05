@@ -1,6 +1,7 @@
 # Eigen Technical Test by Yofi
 
-disclaimer
+DISCLAIMER :
+This project was built using Node version 18.7.0 and NPM version 9.6.0
 
 # To Run this Project
 
