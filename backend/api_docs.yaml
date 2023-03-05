@@ -1,0 +1,179 @@
+openapi: 3.0.0
+info:
+  title: TEST-EIGEN.yaml
+  description: ''
+  contact: {}
+  version: '1.0'
+servers:
+- url: 'http://localhost:5500'
+paths:
+  /v1/member:
+    get:
+      tags:
+      - Member
+      summary: Get Members
+      description: ''
+      operationId: GetMembers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+  /v1/borrow:
+    post:
+      tags:
+      - Borrow
+      summary: Create Borrow
+      description: ''
+      operationId: CreateBorrow
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateBorrowRequest'
+              - example:
+                  member_id: 1
+                  book_ids:
+                  - 1
+                  - 2
+            example:
+              member_id: 1
+              book_ids:
+              - 1
+              - 2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+  /v1/borrow/return:
+    put:
+      tags:
+      - Borrow
+      summary: Return Borrow
+      description: ''
+      operationId: ReturnBorrow
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ReturnBorrowRequest'
+              - example:
+                  member_id: 1
+                  book_ids:
+                  - 1
+                  - 2
+            example:
+              member_id: 1
+              book_ids:
+              - 1
+              - 2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+  /v1/book:
+    get:
+      tags:
+      - Book
+      summary: Get Books
+      description: ''
+      operationId: GetBooks
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+  /v1:
+    get:
+      summary: Base
+      description: ''
+      operationId: Base
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    CreateBorrowRequest:
+      title: CreateBorrowRequest
+      required:
+      - member_id
+      - book_ids
+      type: object
+      properties:
+        member_id:
+          type: integer
+          format: int32
+        book_ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: ''
+      example:
+        member_id: 1
+        book_ids:
+        - 1
+        - 2
+    ReturnBorrowRequest:
+      title: ReturnBorrowRequest
+      required:
+      - member_id
+      - book_ids
+      type: object
+      properties:
+        member_id:
+          type: integer
+          format: int32
+        book_ids:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: ''
+      example:
+        member_id: 1
+        book_ids:
+        - 1
+        - 2
+tags:
+- name: Member
+  description: ''
+- name: Borrow
+  description: ''
+- name: Book
+  description: ''
