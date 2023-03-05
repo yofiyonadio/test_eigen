@@ -1,7 +1,7 @@
 # Eigen Technical Test by Yofi
 
 DISCLAIMER :
-This project was built using Node version 18.7.0, NPM version 9.6.0 and PostgreSQL 14.1
+This project was built using version Node 18.7.0, NPM 9.6.0 and PostgreSQL 14.1
 
 # To Run this Project
 
